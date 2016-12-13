@@ -22,23 +22,12 @@ function f = bipolar(x,theta=0)
 	end
 end
 
-% Hebb Rule  intial weights and bias are both zero
-for n = 1:10
-	w = 0;
-	for i = n: 10+n-1
-		j = mod(i,10);
-		if j == 0
-			j = 10;
-		end
-		w +=  s(j,:)' * s(j,:);
-	end
-	n
-	count = 0;
-	for i = 1:10
-		if nnz(arrayfun(@bipolar, s(i,:) * w)-s(i,:)) == 0
-			i
-			count += 1;
-		end
-	end
-	count
+
+%Hebb Rule  intial weights and bias are both zero
+w = 0;
+for i = [1 2 3 4 5 9]
+	w +=  s(i,:)' * s(i,:);
+end
+for i = 1:10
+	nnz(arrayfun(@bipolar, s(i,:) * w)-s(i,:))
 end
